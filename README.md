@@ -83,11 +83,15 @@ X_train_lda = lda.fit_transform(X_train, y_train)
 #### PCA 累计方差解释率 
 ![PCA Cumulative Variance](./PCA累计解释方差图%20.png) 
 
+#### PCA 主成分方差贡献图
+![LDA vs PCA vs Common](./主成分方差贡献度.png) 
+
 #### LDA vs PCA 二维投影
 ![LDA vs PCA](./LDA与PCA投影可视化%20.png)  
 
 #### 模型分类准确率比对
-![LDA vs PCA vs Common](./模型准确率对比.png) 
+![LDA vs PCA vs Common](./模型准确率对比%20.png) 
+
 
 ---
 
