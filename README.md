@@ -126,7 +126,7 @@ Python 3.8+
 ### 运行说明
 1. 克隆仓库：
    ```bash
-   git clone [您的仓库URL]
+   git clone [git@github.com:djj316/zyh.git]
    ```
 2. 安装依赖：
    ```bash
@@ -140,5 +140,5 @@ Python 3.8+
 ---
 
 **报告作者**：zyh 
-**License**：MIT
+
 
