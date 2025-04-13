@@ -80,9 +80,8 @@ X_train_lda = lda.fit_transform(X_train, y_train)
 
 ### 4.2 可视化
 #### PCA 累计方差解释率
-![PCA Cumulative Variance]
-*保留95%方差需要9个主成分*
-(./PCA累计解释方差图%20.png)  
+*保留95%方差需要9个主成分* 
+![PCA Cumulative Variance](./PCA累计解释方差图%20.png) 
 
 #### LDA vs PCA 二维投影
 ![LDA vs PCA](./LDA与PCA投影可视化%20.png)  
