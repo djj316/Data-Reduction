@@ -17,16 +17,17 @@
 ---
 
 ## 1. 实验目的
-比较 PCA（主成分分析）和 LDA（线性判别分析）在葡萄酒质量分类任务中的表现：
+比较 PCA(主成分分析)和 LDA(线性判别分析)在葡萄酒质量分类任务中的表现:
 - 评估不同降维技术对分类准确率的影响  
 - 可视化高维数据在低维空间的投影结构  
 - 分析方差保留与维度缩减的权衡关系  
+- 探究数据规约对一般实验的影响
 
 ---
 
 ## 2. 数据集
 ### 数据来源
-UCI Machine Learning Repository : [Wine Quality Dataset (ID:186)](https://archive.ics.uci.edu/ml/datasets/Wine+Quality)
+UCI Machine Learning Repository: [Wine Quality Dataset (ID:186)](https://archive.ics.uci.edu/ml/datasets/Wine+Quality)
 
 ### 特征说明
 | 特征类型       | 数量 | 示例                  |
@@ -56,7 +57,7 @@ B --> G[KNN分类模型3]
 ```
 
 ### 关键代码
-#### 选择最合适的PCA维度
+#### PCA中,为确保在降维后仍能保留大部分原始信息，我们选择保留累计解释方差达到 95% 的前若干主成分。
 ```python
 pca_full = PCA()
 pca_full.fit(X_train_scaled)
@@ -79,8 +80,7 @@ X_train_lda = lda.fit_transform(X_train, y_train)
 | LDA        | 0.82       | 2          |
 
 ### 4.2 可视化
-#### PCA 累计方差解释率
-*保留95%方差需要9个主成分* 
+#### PCA 累计方差解释率 
 ![PCA Cumulative Variance](./PCA累计解释方差图%20.png) 
 
 #### LDA vs PCA 二维投影
@@ -136,11 +136,11 @@ Python 3.8+
    python scripts/wine_analysis.py
    ```
 4. 完整代码
-   ```python
-   from ucimlrepo import fetch_ucirepo
+   ```from ucimlrepo import fetch_ucirepo
    import numpy as np
    import pandas as pd
    import matplotlib.pyplot as plt
+   import seaborn as sns
    from sklearn.model_selection import train_test_split
    from sklearn.preprocessing import StandardScaler
    from sklearn.decomposition import PCA
@@ -249,7 +249,6 @@ Python 3.8+
 
    bars = plt.bar(models, accuracies, color=colors, edgecolor='black')
 
-   # 添加准确率文本
    for bar in bars:
       yval = bar.get_height()
       plt.text(bar.get_x() + bar.get_width() / 2, yval + 0.015,
@@ -261,6 +260,33 @@ Python 3.8+
    plt.grid(axis='y', linestyle='--', alpha=0.6)
    plt.tight_layout()
    plt.savefig("模型准确率对比.png", dpi=300)
+   plt.show()
+
+   # 14. 主成分方差贡献度分析
+   plt.figure(figsize=(10, 6))
+   explained_variance = pca.explained_variance_ratio_
+   cumulative = np.cumsum(explained_variance)
+
+   plt.bar(range(1, len(explained_variance)+1), 
+         explained_variance, 
+         alpha=0.6,
+         color='g',
+         label='单个主成分解释方差')
+
+   plt.step(range(1, len(cumulative)+1), 
+            cumulative, 
+            where='mid',
+            label='累计解释方差',
+            color='r')
+
+   plt.axhline(y=0.95, color='b', linestyle='--', label='95%方差阈值')
+   plt.xlabel("主成分数量")
+   plt.ylabel("解释方差比例")
+   plt.title("各主成分方差贡献度分析", fontsize=14)
+   plt.legend(loc='best')
+   plt.grid(axis='y', linestyle='--', alpha=0.4)
+   plt.tight_layout()
+   plt.savefig("主成分方差贡献度.png", dpi=300)
    plt.show()
    ```
 ---
