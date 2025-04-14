@@ -1,6 +1,7 @@
 # 数据归约技术实验报告：基于 Wine Quality 数据集的 PCA 与 LDA 分析
 
 **GitHub 仓库**：[(https://github.com/djj316/Data-Reduction)]  
+
 **最后更新**：2025年4月13日  
 
 ---
@@ -32,8 +33,8 @@ UCI Machine Learning Repository: [Wine Quality Dataset (ID:186)](https://archive
 ### 特征说明
 | 特征类型       | 数量 | 示例                  |
 |----------------|------|-----------------------|
-| 理化指标       | 11   | 酸度、pH值、酒精浓度等 |
-| 目标变量       | 1    | 质量评分（3-9）       |
+| 理化指标(X)       | 11   | 酸度、pH值、酒精浓度等 |
+| 目标变量(y)       | 1    | 质量评分（3-9）       |
 
 ### 预处理
 ```python
@@ -55,21 +56,6 @@ C --> E[KNN分类模型1]
 D --> F[KNN分类模型2]
 B --> G[KNN分类模型3]
 ```
-
-### 关键代码
-#### PCA中,为确保在降维后仍能保留大部分原始信息，我们选择保留累计解释方差达到 95% 的前若干主成分。
-```python
-pca_full = PCA()
-pca_full.fit(X_train_scaled)
-n_components_95 = np.argmax(np.cumsum(pca_full.explained_variance_ratio_) >= 0.95) + 1
-```
-
-#### LDA 投影
-```python
-lda = LinearDiscriminantAnalysis(n_components=2)
-X_train_lda = lda.fit_transform(X_train, y_train)
-```
----
 
 ## 4. 结果
 ### 4.1 分类准确率对比
@@ -109,10 +95,10 @@ X_train_lda = lda.fit_transform(X_train, y_train)
 ---
 
 ## 6. 结论
-1. PCA 在保留95%方差时可减少18%维度(11→9) 
-2. LDA 在极端降维(11→2)场景下效率更高  
+1. 基于本次实验数据，PCA 在保留95%方差时可减少18%维度 
+2. LDA 在极端降维场景下效率更高 
 3. **推荐方案**：  
-   - 优先使用PCA进行初步特征分析  
+   - 实现数据归约时，优先考虑PCA进行初步特征分析  
    - 若需强降维且标签可靠，选择LDA  
 ---
 
@@ -126,20 +112,7 @@ Python 3.8+
 - matplotlib>=3.5  
 ```
 
-### 运行说明
-1. 克隆仓库：
-   ```bash
-   git clone [https://github.com/djj316/zyh.git]
-   ```
-2. 安装依赖：
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. 执行实验：
-   ```bash
-   python scripts/wine_analysis.py
-   ```
-4. 完整代码
+### 完整代码
    ```from ucimlrepo import fetch_ucirepo
    import numpy as np
    import pandas as pd
@@ -295,5 +268,8 @@ Python 3.8+
    ```
 ---
 
-**报告作者**:zyh 
+**报告作者**:
+```
+zyh
+``` 
 
