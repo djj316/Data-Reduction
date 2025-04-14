@@ -18,7 +18,7 @@
 ---
 
 ## 1. 实验目的
-本实验旨在探讨两种经典降维技术——主成分分析（Principal Component Analysis, PCA）与线性判别分析（Linear Discriminant Analysis, LDA）在葡萄酒质量分类任务中的应用效果，具体目标如下：
+本实验旨在探讨数据归约中两种经典降维技术——主成分分析（Principal Component Analysis, PCA）与线性判别分析（Linear Discriminant Analysis, LDA）在葡萄酒质量分类任务中的应用效果，具体目标如下：
 
 - 比较不同降维方法对分类模型性能的影响；
 - 可视化高维数据在低维空间中的分布特征；
