@@ -1,7 +1,9 @@
 
 # 数据归约技术实验报告：基于 Wine Quality 数据集的 PCA 与 LDA 分析
 
-**GitHub 仓库**：[https://github.com/djj316/Data-Reduction](https://github.com/djj316/Data-Reduction)  
+**GitHub 仓库**：[https://github.com/djj316/Data-Reduction](https://github.com/djj316/Data-Reduction) 
+##### 附上二维码：
+![附上代码](./ewm.png)
 **最后更新**：2025年4月13日  
 
 ---
